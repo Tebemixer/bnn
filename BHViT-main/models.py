@@ -205,7 +205,8 @@ def get_model(args, model_config, model_type, weight_bits, input_bits):
     config.weight_bits = weight_bits
     config.input_bits = input_bits
     config.some_fp = args.some_fp
-    if model_type == "dbhvit":
+    model_type = model_type.lower()
+    if model_type in {"dbhvit", "bhvit"}:
         model = BHViTForImageClassification(config=config)
     else:
         raise NotImplementedError("Need to specify a supported model type.")
