@@ -7,9 +7,9 @@ MASTER_PORT=${MASTER_PORT:-25641}
 OUTPUT_DIR=${OUTPUT_DIR:-./output_cifar_no_teacher}
 
 torchrun --nproc_per_node=${NPROC_PER_NODE} --master_port=${MASTER_PORT} main_new.py \
-    --num-workers=2 \
-    --batch-size=128 \
-    --epochs=100 \
+    --num-workers=8 \
+    --batch-size=32 \
+    --epochs=4\
     --dropout=0.0 \
     --drop-path=0.0 \
     --opt=adamw \
