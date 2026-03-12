@@ -313,10 +313,13 @@ def main(args):
     teacher_model = None
     #regnety_160,deit_small_patch16_224
     if args.teacher_model:
+        teacher_pretrained = args.nb_classes == 1000
+        if not teacher_pretrained:
+            print(f"Disabling pretrained teacher weights because nb_classes={args.nb_classes} (expected 1000 for pretrained head).")
         teacher_model = create_model(
             'deit_small_patch16_224',
-            pretrained=True,
-            num_classes=1000,)
+            pretrained=teacher_pretrained,
+            num_classes=args.nb_classes,)
         teacher_model.to(device)
         teacher_model.eval()
         teacher_model_without_ddp = teacher_model
