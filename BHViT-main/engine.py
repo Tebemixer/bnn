@@ -55,7 +55,8 @@ def train_mix_epoch(model: torch.nn.Module, teacher_model: torch.nn.Module, crit
         loss_scaler(loss, optimizer, clip_grad=max_norm,
                     parameters=model.parameters(), create_graph=is_second_order)
 
-        torch.cuda.synchronize()
+        if torch.cuda.is_available():
+            torch.cuda.synchronize()
         if model_ema is not None:
             model_ema.update(model)
         metric_logger.update(base_loss=base_loss_value)
@@ -119,7 +120,8 @@ def train_one_epoch_L1(model: torch.nn.Module, teacher_model: torch.nn.Module, c
         loss_scaler(loss, optimizer, clip_grad=max_norm,
                     parameters=model.parameters(), create_graph=is_second_order)
 
-        torch.cuda.synchronize()
+        if torch.cuda.is_available():
+            torch.cuda.synchronize()
         if model_ema is not None:
             model_ema.update(model)
 
@@ -163,7 +165,8 @@ def train_one_epoch2(model: torch.nn.Module, teacher_model: torch.nn.Module, cri
         loss_scaler(loss, optimizer, clip_grad=max_norm,
                     parameters=model.parameters(), create_graph=is_second_order)
 
-        torch.cuda.synchronize()
+        if torch.cuda.is_available():
+            torch.cuda.synchronize()
         if model_ema is not None:
             model_ema.update(model)
 
@@ -224,7 +227,8 @@ def train_one_epoch(model: torch.nn.Module, teacher_model: torch.nn.Module, crit
         loss_scaler(loss, optimizer, clip_grad=max_norm,
                     parameters=model.parameters(), create_graph=is_second_order)
 
-        torch.cuda.synchronize()
+        if torch.cuda.is_available():
+            torch.cuda.synchronize()
         if model_ema is not None:
             model_ema.update(model)
 
